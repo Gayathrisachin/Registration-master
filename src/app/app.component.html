@@ -9,7 +9,7 @@
     Registration
     </span>
     <div class="wrap-input">
-      <input type="text" class="user" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"> 
+      <input type="text" class="input" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"> 
       <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
         <div *ngIf="f.firstName.errors.required">First Name is required</div>
       </div>   
@@ -37,18 +37,18 @@
     </div> 
     </div>
     <div class="wrap-input">
-    <input class="input" type="text"  placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" > 
+    <input class="input" type="text"  placeholder="Password"  formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" > 
     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
       <div *ngIf="f.password.errors.required">Password is required</div>
-      <div *ngIf="f.password.errors.minlength">Password is poor</div>
-      <div *ngIf="f.password.errors.maxlength">Password is strong</div>
+    
+      
 
-      <!-- <div *ngIf="f.password.errors.pattern">Password should contain minimum 6 characters,atleast one capital letter,one number and one special character</div> -->
+      <div *ngIf="f.password.errors.pattern">Password should contain minimum 6 characters,atleast one capital letter,one number and one special character</div>
 
     </div> 
     </div>
-    <div class="wrap-input">
-      <input  class="input" type="text"  placeholder="Re enter Password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
+    <div class="wrap-input" >
+      <input  class="input"  type="text" placeholder="Re enter Password"  [disabled]="isDisabled(value)"  formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
       <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
         <div *ngIf="f.confirmPassword.errors.required">Reenter Password is required</div>
         <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>

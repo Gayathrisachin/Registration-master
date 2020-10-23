@@ -13,8 +13,9 @@ import { ConfirmedValidator } from './confirmed.validator';
 export class AppComponent {
 form: FormGroup;
   submitted = false;
-
+  _isDisabled=false
   constructor(private formBuilder: FormBuilder) { }
+  disableTextbox =  false;
 
   ngOnInit() {
   this.form = this.formBuilder.group({
@@ -22,9 +23,9 @@ form: FormGroup;
     lastName: ['', Validators.required],
     phone:['',[ Validators.required,Validators.pattern('[6-9]\\d{9}')]],
     email: ['',[ Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-    password: ['', [Validators.required, Validators.pattern('(?=.*[A-Z])(?=.*\\d)[A-Z\\d^A-Z0-9].{5,}$'),Validators.minLength(9),Validators.maxLength(8)]],
+    password: ['', [Validators.required, Validators.pattern('(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d^A-Z0-9].{5,}$'),]],
 
-    confirmPassword: ['', Validators.required]
+    confirmPassword: [{ value: '', disabled: true }, Validators.required]
 }, {
     validator: ConfirmedValidator('password', 'confirmPassword')
 });
@@ -40,6 +41,17 @@ this.submitted = true;
 if (this.form.invalid) {
     return;
 }
-
+else{
+  this.submitted=true
 }
+}
+
+ isDisabled(value: boolean) {
+  this._isDisabled = value;
+  if(this.form.controls.password.invalid) {
+   this.form.controls['confirmPassword'].disable();
+  } else {
+     this.form.controls['confirmPassword'].enable();
+   }
+ }
 }
